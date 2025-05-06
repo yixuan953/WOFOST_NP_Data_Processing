@@ -1,6 +1,10 @@
 #!/bin/bash
 #-----------------------------Mail address-----------------------------
 
+#-----------------------------Required resources-----------------------
+#SBATCH --time=600
+#SBATCH --mem=250000
+
 #-----------------------------Output files-----------------------------
 #SBATCH --output=./HPC_Report/output_%j.txt
 #SBATCH --error=./HPC_Report/error_output_%j.txt
@@ -10,7 +14,7 @@ module load cdo
 module load nco
 module load netcdf
 
-CropTypes=('mainrice' 'secondrice' 'springwheat' 'winterwheat' 'soybean' 'maize')
+CropTypes=('secondrice' 'springwheat') #'mainrice' 'secondrice' 'springwheat' 'winterwheat' 'soybean' 'maize'
 StudyAreas=('Indus' 'LaPlata' 'Rhine' 'Yangtze')
 
 input_dir="/lustre/nobackup/WUR/ESG/zhou111/Model_Results/1_Yp_WOFOST"
@@ -77,7 +81,6 @@ Cut_merge_nc(){
             fi
         done
         
-        # Clean up temporary files
     done
     
     # Clean up global temporary files

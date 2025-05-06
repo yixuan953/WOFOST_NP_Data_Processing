@@ -10,9 +10,11 @@
 #SBATCH --mem=250000
 
 #--------------------Environment, Operations and Job steps-------------
-# module load cdo
+module load cdo
+module load nco
+module load python/3.12.0
 
-CropTypes=('mainrice' 'secondrice' 'springwheat' 'winterwheat' 'soybean' 'maize')
+CropTypes=('mainrice' 'secondrice' 'springwheat' 'winterwheat' 'soybean' 'maize') #'mainrice' 'secondrice' 'springwheat' 'winterwheat' 'soybean' 'maize'
 
 # The N, P input .nc file will contain 7 variables
 N_manure_dir="/lustre/nobackup/WUR/ESG/zhou111/Data/Fertilization/N_Fert_Man_Inorg_1961-2020/N_Manure_app_rate_05d"
@@ -87,5 +89,16 @@ Get_global_NP_input(){
 
 
 # Align the time dimension (1980 - 2020)
-module load python/3.12.0
-python /lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Code/1_2_Align_time.py
+# python /lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Code/1_2_Align_time.py
+
+# Transform generic gridtype to lonlat
+Generic_to_Lonlat(){
+
+    for CropName in "${CropTypes[@]}"; do
+        ncks -C -O -x -v time /lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/Temp/${CropName}_NPinput_1980_2020.nc /lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/Temp/${CropName}_NPinput_rem_time.nc
+        cdo setgrid,/lustre/nobackup/WUR/ESG/zhou111/Data/Raw/General/global.txt /lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/Temp/${CropName}_NPinput_rem_time.nc /lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/${CropName}_NPinput_1980_2020.nc
+        echo "Processed ${CropName}"
+    done
+
+}
+# Generic_to_Lonlat

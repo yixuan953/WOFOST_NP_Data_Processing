@@ -59,4 +59,4 @@ for crop in crop_types:
     output_ds['lon'] = lon
 
     # Save result
-    output_ds.to_netcdf(f"/lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/{crop}_NPinput_1980_2020.nc")
+    output_ds.to_netcdf(f"/lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/Temp/{crop}_NPinput_1980_2020.nc")

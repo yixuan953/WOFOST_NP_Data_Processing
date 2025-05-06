@@ -12,8 +12,7 @@
 #--------------------Environment, Operations and Job steps-------------
 
 # Step 1: Transform the gridtype from generic to lonlat (to avoid double lon in further steps)
-# module load python/3.12.0
-# python /lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Code/0_Generic2lonlat.py
+# cdo setgrid,/lustre/nobackup/WUR/ESG/zhou111/Data/Raw/General/global.txt /lustre/nobackup/WUR/ESG/zhou111/Data/Raw/Slope/ddm30_slope_05d.nc /lustre/nobackup/WUR/ESG/zhou111/Data/Raw/Slope/ddm30_slope_05d_lonlat.nc
 
 # Step 2: Merge all of the background values to one .nc file
 module load cdo
