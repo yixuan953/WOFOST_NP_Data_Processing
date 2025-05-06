@@ -14,7 +14,7 @@ for crop in crop_types:
     ds = xr.open_dataset(f"/lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/Temp/{crop}_merged_NPinput.nc")
 
     # Target year range
-    target_years = np.arange(1980, 2021)
+    target_years = np.arange(1981, 2021)
 
     # Output dataset
     output_ds = xr.Dataset()
@@ -59,4 +59,4 @@ for crop in crop_types:
     output_ds['lon'] = lon
 
     # Save result
-    output_ds.to_netcdf(f"/lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/Temp/{crop}_NPinput_1980_2020.nc")
+    output_ds.to_netcdf(f"/lustre/nobackup/WUR/ESG/zhou111/WOFOST-NPcycling/Data/Temp/{crop}_NPinput_1981_2020.nc")
